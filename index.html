@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./loginform.html">
+    <style>
+      body {
+        background-color: chartreuse;
+              }
+      h1 {
+        text-align: center;
+        color: whitesmoke;
+      }
+      .forms {
+        max-width: 400px;
+        margin: auto;
+        background:rgb(242, 79, 172);
+        color: #150202;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 100px;
+      }
+      .signup-heading {
+        text-align: center;
+      }
+      .form-group {
+        margin-left: 100px;
+        margin-top: 20px;
+      }
+      input {
+        width: 228px;
+        height: 29px;
+        padding: 5px;
+      }
+      button {
+        background: black;
+        border: none;
+        color:white;
+        padding: 6px 23px;
+        font-size: 15px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .btn-group {
+        text-align: center;
+        margin-top: 20px;
+      }
+      h4{
+        margin-left: 120px;
+        color:black
+      }
+    </style>
+  </head>
+  <body>
+
+      <h1>REGISTRATION FORM USING JS</h1>
+      <div class="forms">
+        <h2 class="signup-heading">Sign up form</h2>
+        <form>
+          <div class="form-group">
+            <label for="name">Username </label>
+            <input type="text" name="name" id="username" placeholder="enter username"/>
+          </div>
+          <div class="form-group">
+            <label for="name">E-mail </label><br>
+            <input type="text" name="email" id="useremail" placeholder="enter your email"/>
+          </div>
+          <div class="form-group">
+            <label for="name">Password </label>
+            <input type="password" name="password" id="userpass" placeholder="enter password"/>
+          </div>
+        </form>
+        <div class="btn-group">
+          <button id="signup">Signup</button>
+        </div>
+        <a href="./loginform.html"><h4>Already I have a Account</h4></a>
+      </div>
+      <script>
+        document.querySelector("#signup").addEventListener("click", function () {
+  let userName = document.querySelector("#username").value;
+  let userEmail = document.querySelector("#useremail").value;
+  let userPass = document.querySelector("#userpass").value;
+
+  if (userName ||userEmail) {
+    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    let userExists = existingUsers.some(user => user.name === userName);
+
+    if (userExists) {
+      alert("User with this username already exists");
+    } else {
+      let userDetails = { name: userName, email: userEmail, password: userPass };
+      existingUsers.push(userDetails);
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+      alert("Signup successful!");
+      window.location.href = "loginform.html";
+    }
+  } else {
+    alert("Please enter all the details");
+  }
+});
+      </script>
+
+
+  </body>
+</html>
